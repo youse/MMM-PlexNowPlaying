@@ -1,0 +1,18 @@
+{
+  "name": "mmm-plexnowplaying",
+  "version": "1.0.0",
+  "description": "A Plex module for the MagicMirror project",
+  "repository": {
+    "type": "git",
+    "url": "tbd"
+  },
+  "keywords": [
+    "magic mirror",
+	"module"
+  ],
+  "author": "Bryan Youse",
+  "license": "MIT",
+  "dependencies": {
+	  "xml2js": "^0.4.17"
+  }
+}
