@@ -2,7 +2,7 @@ Module.register("MMM-PlexNowPlaying",{
     // Default module config.
     defaults: {
 		//username: '',
-		serverurl: '',
+		serverURL: '',
 		updateInterval: 15 * 1000,
 		delayCount: 5,
 		delayInterval: 60 * 1000,
@@ -29,7 +29,7 @@ Module.register("MMM-PlexNowPlaying",{
 			wrapper.className = "dimmed light small";
 			return wrapper;
 		}
-		if (this.config.serverurl == '') {
+		if (this.config.serverURL == '') {
 			wrapper.innerHTML = "Please check your config file: server URL is missing!";
 			wrapper.className = "bright";
 			return wrapper;
@@ -68,7 +68,7 @@ Module.register("MMM-PlexNowPlaying",{
 				self.songData.title = track.title;
 				self.songData.artist = track.artist;
 				self.songData.album = track.album;
-				self.songData.image = self.config.serverurl+track.thumb;
+				self.songData.image = self.config.serverURL+track.thumb;
 				self.songData.playing = true;
 				break; ///  one song is enough for now
 			}
@@ -91,7 +91,7 @@ Module.register("MMM-PlexNowPlaying",{
 		var self = this;
 		setTimeout(function() {
 			//  ask for data
-			self.sendSocketNotification('GETDATA', self.config.serverurl);
+			self.sendSocketNotification('GETDATA', self.config.serverURL);
 		}, nextLoad);
 	}
 });

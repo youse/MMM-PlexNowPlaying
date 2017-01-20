@@ -16,7 +16,7 @@ npm install
 The last part is to pull in the lovely [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js) XML parser.
 
 ##Module Usage
-The entry in the `module array` in your `config.js` can look as follows. The serverurl field is **mandatory**. All other fields have default values.
+The entry in the `module array` in your `config.js` can look as follows. The serverURL field is **mandatory**. All other fields have default values.
 
 ```
         {   
@@ -24,7 +24,7 @@ The entry in the `module array` in your `config.js` can look as follows. The ser
             disabled: false,
             position: 'top_left',
             config: {
-                serverurl: 'http://your-plex-server-address:32400',
+                serverURL: 'http://your-plex-server-address:32400',
                 updateInterval: 10 * 1000,  // how often to poll for song change while listening (default 10s) 
                 delayCount: 5,  // how many empty queries before deciding we aren't listening
                 delayInterval: 60 * 1000,  // how often to poll for new listening activity (default 60s)
