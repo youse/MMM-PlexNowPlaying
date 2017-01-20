@@ -5,7 +5,7 @@ Module.register("MMM-PlexNowPlaying",{
 		serverurl: '',
 		updateInterval: 15 * 1000,
 		delayCount: 5,
-		delayInterval: 120*1000,
+		delayInterval: 60 * 1000,
 		animationSpeed: 1000,
     },
 	getStyles: function() {
