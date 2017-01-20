@@ -1,44 +1,34 @@
-# MMM-Scrobbler
-This is an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays your currently playing music. To use this module you need to have a Last.fm account and scrobble your music.
+# MMM-PlexNowPlaying
+This is an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays the currently playing music of your [Plex Media Server](plex.tv).
+
+It works & looks exactly like [MMM-Scrobbler](https://github.com/PtrBld/MMM-Scrobbler).  The PMS actually can scrobble to last.fm, but unfortunately it doesn't implement the "now playing" feature of last.fm.  Hence, this module was born :)
 
 ## Installation
 
-1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/PtrBld/MMM-Scrobbler.git`.
-
-2. A new folder will appear. That's all :)
-
-##Configuration
-You can scrobble all your music with Last.fm.
-
-1. Create an [account](https://secure.last.fm/de/join)
-
-2. Create an [api key](http://www.last.fm/api/account/create)
-
-3. Configure your client to scrobble your music. [How To: Scrobble to Last.fm from iTunes, Spotify, and more](http://www.cnet.com/how-to/how-to-scrobble-to-last-fm-from-itunes-spotify-and-more/)
-
-##Module Usage
-The entry in the `module array` in your `config.js` can look like the following. Only username and apikey are mandatory fields. All other fields have default values.
+Navigate into your MagicMirror's `modules` folder:
 
 ```
-{
-			
-	module: 'MMM-Scrobbler',
-	
-	position: 'top_right',
-	config: {
+git clone https://github.com/youse/MMM-PlexNowPlaying.git
+cd MMM-PlexNowPlaying
+npm install
+```
 
-		username: 'Last.fm username',
-	
-		apikey: 'Last.fm api key',
-	
-		//time interval to search for new song (every 15 seconds)
-		updateInterval: 15 * 1000,
-		//how often should we try to retrieve a song if not listening
-		delayCount: 5,
-		//time interval to search for new song if the 5 times not listening is received.
-		//set this to the same number as updateInterval to ignore this option	
-		delayInterval: 120*1000,
-		animationSpeed: 1000,
-		}
-	
-}
+The last part is to pull in the lovely [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js) XML parser.
+
+##Module Usage
+The entry in the `module array` in your `config.js` can look as follows. The serverurl field is **mandatory**. All other fields have default values.
+
+```
+        {   
+            module: 'MMM-PlexNowPlaying',
+            disabled: false,
+            position: 'top_left',
+            config: {
+                serverurl: 'http://your-plex-server-address:32400',
+                updateInterval: 10 * 1000,  // how often to poll for song change while listening (default 10s) 
+                delayCount: 5,  // how many empty queries before deciding we aren't listening
+                delayInterval: 60 * 1000,  // how often to poll for new listening activity (default 60s)
+                animationSpeed: 1000
+            }
+        }
+```
