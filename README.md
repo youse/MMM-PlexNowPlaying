@@ -1,5 +1,5 @@
 # MMM-PlexNowPlaying
-This is an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays the currently playing music of your [Plex Media Server](plex.tv).
+This is an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays the currently playing music of your [Plex Media Server](https://plex.tv).
 
 It works & looks exactly like [MMM-Scrobbler](https://github.com/PtrBld/MMM-Scrobbler).  The PMS actually can scrobble to last.fm, but unfortunately it doesn't implement the "now playing" feature of last.fm.  Hence, this module was born :)
 
