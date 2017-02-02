@@ -8,6 +8,7 @@
 var NodeHelper = require("node_helper");
 var request = require('request');
 var parseString = require('xml2js').parseString;
+//const util = require("util");
 
 module.exports = NodeHelper.create({
 	//  Subclass start method
@@ -18,7 +19,10 @@ module.exports = NodeHelper.create({
 	extractData: function(xmlobj){
 		playlist = []
 		//console.dir(xmlobj);
-		var tracks = parseInt(xmlobj.MediaContainer.$.size, 10);
+
+		var tracks = 0;
+		if ( xmlobj.MediaContainer.Track !== undefined )
+			tracks = parseInt(xmlobj.MediaContainer.Track.length, 10);
 		for(var i = 0; i < tracks; i++){
 			out = {}
 
@@ -38,6 +42,43 @@ module.exports = NodeHelper.create({
 
 			playlist.push(out);
 		}
+
+		var videos = 0;
+		if ( xmlobj.MediaContainer.Video !== undefined )
+			videos = parseInt(xmlobj.MediaContainer.Video.length, 10);
+		for(var i = 0; i < videos; i++){
+			out = {}
+
+			var video = xmlobj.MediaContainer.Video[i];
+			var videoAttrs = video.$;
+
+			//  get the year as line 2
+			fulldate = videoAttrs.originallyAvailableAt;
+			if ( fulldate === undefined )
+				out.artist = '';
+			else{
+				var date = new Date(fulldate);
+				out.artist = date.getFullYear();
+			}
+
+			//  get the tagline as line 3
+			var tagline = videoAttrs.tagline;
+			if ( tagline !== undefined )
+				out.album = videoAttrs.tagline;
+			else
+				out.album = '';
+			out.title = videoAttrs.title;
+			out.thumb = videoAttrs.thumb;
+
+			player = video.Player[0].$;
+			out.state = player.state;  //  namely "playing", "paused"
+			out.device = player.device;
+			out.deviceTitle = player.title;
+			out.deviceVersion = player.version;
+
+			playlist.push(out);
+		}
+
 		return playlist;
 	},
 
