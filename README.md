@@ -30,7 +30,8 @@ The entry in the `module array` in your `config.js` can look as follows. The ser
                 updateInterval: 10 * 1000,  // how often to poll for song change while listening (default 10s)
                 delayCount: 5,  // how many empty queries before deciding we aren't listening
                 delayInterval: 60 * 1000,  // how often to poll for new listening activity (default 60s)
-                animationSpeed: 1000
+                animationSpeed: 1000,
+                token: '', // needed if you encounter error 401: unauthorized - run getPlexToken.ps1 in that case (adapt username/password before)
             }
         }
 ```
