@@ -86,6 +86,9 @@ module.exports = NodeHelper.create({
 		if ( notification == "GETDATA" ){
 			var self = this;
 			var plexURL = payload+'/status/sessions';
+			if(payload.token){
+				plexURL += "?X-Plex-Token=" + payload.token;
+			}
 			request({ url: plexURL, method: 'GET' }, function(error, response, body) {
 				//console.log(error);
 				//console.log(response);
@@ -98,7 +101,8 @@ module.exports = NodeHelper.create({
 					self.sendSocketNotification('PLEX_SUCCESS', extracted);
 				}
 				else{
-					self.sendSocketNotification('PLEX_FAIL', body);
+					var error = body.replace(/<[^>]+>/g, '|').replace(/\|+/g, '|'); // turns html response into readable format in console
+					self.sendSocketNotification('PLEX_FAIL', "PLEX_FAIL: " + error);
 				}
 			});
 		}

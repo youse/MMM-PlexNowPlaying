@@ -7,6 +7,7 @@ Module.register("MMM-PlexNowPlaying",{
 		delayCount: 5,
 		delayInterval: 60 * 1000,
 		animationSpeed: 1000,
+		token: '',
     },
 	getStyles: function() {
 		return ['MMM-PlexNowPlaying.css']
@@ -69,6 +70,9 @@ Module.register("MMM-PlexNowPlaying",{
 				self.songData.artist = track.artist;
 				self.songData.album = track.album;
 				self.songData.image = self.config.serverURL+track.thumb;
+				if(self.config.token){
+					self.songData.image += "?X-Plex-Token=" + self.config.token;
+				}
 				self.songData.playing = true;
 				break; ///  one song is enough for now
 			}
@@ -91,7 +95,7 @@ Module.register("MMM-PlexNowPlaying",{
 		var self = this;
 		setTimeout(function() {
 			//  ask for data
-			self.sendSocketNotification('GETDATA', self.config.serverURL);
+			self.sendSocketNotification('GETDATA', {"serverUrl": self.config.serverURL, "token": self.config.token });
 		}, nextLoad);
 	}
 });
